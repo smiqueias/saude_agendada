@@ -13,10 +13,21 @@ final class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: double.infinity,
-      color: context.colors.danger,
+    /// Example Theme Usage
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        color: context.colors.gray100,
+        child: Center(
+          child: Text(
+            "TESTE FONTE",
+            style: context.typography.textLarge.copyWith(
+              color: context.colors.greenBase,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

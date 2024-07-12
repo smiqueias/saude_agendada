@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/ui/theme/typography.dart';
 
 import 'color_scheme.dart';
 
-final class AppColorSchemeProvider extends InheritedWidget {
+final class AppThemeProvider extends InheritedWidget {
   final AppColorScheme appColorScheme;
+  final AppTypography typography;
 
-  AppColorSchemeProvider({
+  AppThemeProvider({
     super.key,
     required this.appColorScheme,
+    required this.typography,
     required WidgetBuilder builder,
   }) : super(child: Builder(builder: builder));
 
-  static AppColorSchemeProvider of(BuildContext context) {
+  static AppThemeProvider of(BuildContext context) {
     final scheme =
-        context.dependOnInheritedWidgetOfExactType<AppColorSchemeProvider>();
+        context.dependOnInheritedWidgetOfExactType<AppThemeProvider>();
 
     if (scheme != null) {
       return scheme;
@@ -23,7 +26,7 @@ final class AppColorSchemeProvider extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(AppColorSchemeProvider oldWidget) {
+  bool updateShouldNotify(AppThemeProvider oldWidget) {
     return oldWidget.appColorScheme != appColorScheme;
   }
 }
