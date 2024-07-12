@@ -31,5 +31,6 @@ final class UserSerializer implements Serializer<User, Map<String, dynamic>> {
   Map<String, dynamic> to(User object) => <String, dynamic>{
         UserKeys.username: object.name,
         UserKeys.createAt: object.createAt,
+        UserKeys.shouldShowOnboardingScreen: object.shouldShowOnboardingScreen,
       };
 }
