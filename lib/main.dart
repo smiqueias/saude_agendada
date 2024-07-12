@@ -6,6 +6,7 @@ import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/ui/screens/welcome/welcome_screen.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
 import 'package:scheduled_health/ui/theme/color_scheme_provider.dart';
+import 'package:scheduled_health/utils/constants/constants.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
@@ -37,6 +38,9 @@ class _MainAppState extends State<MainApp> {
         return MaterialApp(
           initialRoute: WelcomeScreen.routeName,
           routes: appRoutes,
+          theme: ThemeData(
+            fontFamily: fontFamily,
+          ),
         );
       },
     );
