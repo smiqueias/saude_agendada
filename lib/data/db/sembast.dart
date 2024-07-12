@@ -1,12 +1,5 @@
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
-import 'package:scheduled_health/data/db/data_base.dart';
 import 'package:scheduled_health/factories/sembast_store_factory.dart';
 import 'package:sembast/sembast.dart';
-import 'package:sembast/sembast_io.dart';
-
-const String _dbName = 'scheduled_health_db';
-const _schemaVersion = 1;
 
 abstract interface class SembastDatabaseHandler {
   Future<void> put({
@@ -35,21 +28,6 @@ abstract interface class SembastDatabaseHandler {
     required List<String> ids,
     required String store,
   });
-}
-
-final class SembastDatabaseInit implements AppDataBase {
-  @override
-  Future<Database> openDatabase() async {
-    final directory = await getApplicationDocumentsDirectory();
-    await directory.create(recursive: true);
-
-    final dbPath = path.join(directory.path, _dbName);
-
-    return databaseFactoryIo.openDatabase(
-      dbPath,
-      version: _schemaVersion,
-    );
-  }
 }
 
 final class SembastDatabase implements SembastDatabaseHandler {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 final class WelcomeScreen extends StatefulWidget {
+  static const routeName = 'WelcomeScreen';
+
   const WelcomeScreen({super.key});
 
   @override
