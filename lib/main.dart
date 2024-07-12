@@ -6,6 +6,7 @@ import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/ui/screens/welcome/welcome_screen.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
 import 'package:scheduled_health/ui/theme/color_scheme_provider.dart';
+import 'package:scheduled_health/ui/theme/typography.dart';
 import 'package:scheduled_health/utils/constants/constants.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
@@ -32,8 +33,26 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return AppColorSchemeProvider(
+    return AppThemeProvider(
       appColorScheme: AppColorScheme.light(),
+      typography: AppTypography(
+        fontFamily: fontFamily,
+        lineHeight: AppLineHeight(
+          small: 1.2,
+          large: 1.4,
+        ),
+        fontSize: AppFontSize(
+          xs_12: 12.0,
+          xl_14: 14.0,
+          sm_16: 16.0,
+          md_32: 32.0,
+        ),
+        fontWeight: AppFontWeight(
+          regular: FontWeight.w400,
+          bold: FontWeight.w700,
+          semibold: FontWeight.w300,
+        ),
+      ),
       builder: (context) {
         return MaterialApp(
           initialRoute: WelcomeScreen.routeName,
