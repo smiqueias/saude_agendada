@@ -1,6 +1,7 @@
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:scheduled_health/data/db/data_base.dart';
+import 'package:scheduled_health/factories/sembast_store_factory.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
@@ -62,41 +63,47 @@ final class SembastDatabase implements SembastDatabaseHandler {
     required Map<String, dynamic> object,
     required String store,
     bool shouldMerge = true,
-  }) async {}
+  }) async {
+    await makeSembastStore(storeName: store).record(id).put(
+          db,
+          object,
+          merge: shouldMerge,
+        );
+  }
 
   @override
   Future<Map<String, dynamic>?> get({
     required String id,
     required String store,
   }) {
-    // TODO: implement get
-    throw UnimplementedError();
+    return makeSembastStore(storeName: store).record(id).get(db);
   }
 
   @override
   Future<List<Map<String, dynamic>>> getAll({
     required String store,
     Finder? finder,
-  }) {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  }) async {
+    final allRegisters = await makeSembastStore(storeName: store).find(
+      db,
+      finder: finder,
+    );
+    return allRegisters.map((record) => record.value).toList(growable: false);
   }
 
   @override
   Future<void> remove({
     required String id,
     required String store,
-  }) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  }) async {
+    await makeSembastStore(storeName: store).record(id).delete(db);
   }
 
   @override
   Future<void> removeAll({
     required List<String> ids,
     required String store,
-  }) {
-    // TODO: implement removeAll
-    throw UnimplementedError();
+  }) async {
+    await makeSembastStore(storeName: store).records(ids).delete(db);
   }
 }
