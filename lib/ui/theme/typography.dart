@@ -107,7 +107,7 @@ final class AppTypography {
         ),
         textLarge = _baseTextStyle.copyWith(
           fontSize: fontSize.md_32,
-          fontWeight: fontWeight.regular,
+          fontWeight: fontWeight.bold,
           fontFamily: fontFamily,
           height: lineHeight.large,
         ),

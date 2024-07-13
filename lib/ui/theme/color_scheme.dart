@@ -19,6 +19,8 @@ final class AppColorScheme {
 
   /// Feedback
   final Color danger;
+  final Color white;
+  final Color black;
 
   AppColorScheme({
     required this.purpleLight,
@@ -33,22 +35,25 @@ final class AppColorScheme {
     required this.gray400,
     required this.gray500,
     required this.gray600,
+    required this.white,
+    required this.black,
     required this.danger,
   });
 
   factory AppColorScheme.light() => AppColorScheme(
-        purpleLight: const Color(0xFFDDD2EF),
-        purpleBase: const Color(0xFF9359F3),
-        purpleDark: const Color(0xFF6F3CC3),
-        greenLight: const Color(0xFFBFE3D0),
-        greenBase: const Color(0xFF479C6E),
-        greenDark: const Color(0xFF2D6C4A),
-        gray100: const Color(0xFFF0EDF2),
-        gray200: const Color(0xFFE5E2E9),
-        gray300: const Color(0xFFE0DCE4),
-        gray400: const Color(0xFFD1CBD7),
-        gray500: const Color(0xFF6B6572),
-        gray600: const Color(0xFF262428),
-        danger: const Color(0xFFC2464D),
-      );
+      purpleLight: const Color(0xFFDDD2EF),
+      purpleBase: const Color(0xFF9359F3),
+      purpleDark: const Color(0xFF6F3CC3),
+      greenLight: const Color(0xFFBFE3D0),
+      greenBase: const Color(0xFF479C6E),
+      greenDark: const Color(0xFF2D6C4A),
+      gray100: const Color(0xFFF0EDF2),
+      gray200: const Color(0xFFE5E2E9),
+      gray300: const Color(0xFFE0DCE4),
+      gray400: const Color(0xFFD1CBD7),
+      gray500: const Color(0xFF6B6572),
+      gray600: const Color(0xFF262428),
+      danger: const Color(0xFFC2464D),
+      white: const Color(0xFFFFFFFF),
+      black: const Color(0xFF000000));
 }
