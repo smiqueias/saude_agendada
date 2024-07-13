@@ -3,7 +3,6 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/data/di.dart';
-import 'package:scheduled_health/ui/screens/welcome/welcome_screen.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
 import 'package:scheduled_health/ui/theme/color_scheme_provider.dart';
 import 'package:scheduled_health/ui/theme/typography.dart';
@@ -26,43 +25,56 @@ final class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  bool _isLoadedDependencies = false;
+
   @override
   void initState() {
     super.initState();
+    _initApp();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AppThemeProvider(
-      appColorScheme: AppColorScheme.light(),
-      typography: AppTypography(
-        fontFamily: fontFamily,
-        lineHeight: AppLineHeight(
-          small: 1.2,
-          large: 1.4,
-        ),
-        fontSize: AppFontSize(
-          xs_12: 12.0,
-          xl_14: 14.0,
-          sm_16: 16.0,
-          md_32: 32.0,
-        ),
-        fontWeight: AppFontWeight(
-          regular: FontWeight.w400,
-          bold: FontWeight.w700,
-          semibold: FontWeight.w300,
-        ),
-      ),
-      builder: (context) {
-        return MaterialApp(
-          initialRoute: WelcomeScreen.routeName,
-          routes: appRoutes,
-          theme: ThemeData(
-            fontFamily: fontFamily,
+    if (_isLoadedDependencies) {
+      return AppThemeProvider(
+        appColorScheme: AppColorScheme.light(),
+        typography: AppTypography(
+          fontFamily: fontFamily,
+          lineHeight: AppLineHeight(
+            small: 1.2,
+            large: 1.4,
           ),
-        );
-      },
-    );
+          fontSize: AppFontSize(
+            xs_12: 12.0,
+            xl_14: 14.0,
+            sm_16: 16.0,
+            md_32: 32.0,
+          ),
+          fontWeight: AppFontWeight(
+            regular: FontWeight.w400,
+            bold: FontWeight.w700,
+            semibold: FontWeight.w300,
+          ),
+        ),
+        builder: (context) {
+          return MaterialApp(
+            initialRoute: AppRoutes.splash.route,
+            routes: appRoutes,
+            theme: ThemeData(
+              fontFamily: fontFamily,
+            ),
+          );
+        },
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
+  Future<void> _initApp() async {
+    await loadDependencies();
+    setState(() {
+      _isLoadedDependencies = true;
+    });
   }
 
   Future<Database> openDatabase() async {
@@ -82,4 +94,19 @@ class _MainAppState extends State<MainApp> {
 
     await registerDataLayerDependencies(db: db);
   }
+}
+
+final class ClampingScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
+    return child;
+  }
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) =>
+      const ClampingScrollPhysics();
 }

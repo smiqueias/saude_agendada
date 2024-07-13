@@ -8,6 +8,7 @@ final class AppColorScheme {
   final Color greenLight;
   final Color greenBase;
   final Color greenDark;
+  final Color greenSplash;
 
   /// Base
   final Color gray100;
@@ -27,6 +28,7 @@ final class AppColorScheme {
     required this.greenLight,
     required this.greenBase,
     required this.greenDark,
+    required this.greenSplash,
     required this.gray100,
     required this.gray200,
     required this.gray300,
@@ -50,5 +52,6 @@ final class AppColorScheme {
         gray500: const Color(0xFF6B6572),
         gray600: const Color(0xFF262428),
         danger: const Color(0xFFC2464D),
+        greenSplash: const Color(0xFF2DA35D),
       );
 }

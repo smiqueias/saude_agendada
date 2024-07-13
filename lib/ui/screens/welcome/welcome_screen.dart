@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
 
 final class WelcomeScreen extends StatefulWidget {
-  static const routeName = 'WelcomeScreen';
-
   const WelcomeScreen({super.key});
 
   @override
@@ -21,7 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         color: context.colors.gray100,
         child: Center(
           child: Text(
-            "TESTE FONTE",
+            "TESTE FONTESS",
             style: context.typography.textLarge.copyWith(
               color: context.colors.greenBase,
             ),
