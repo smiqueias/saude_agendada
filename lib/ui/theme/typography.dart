@@ -112,7 +112,7 @@ final class AppTypography {
           height: lineHeight.large,
         ),
         button = _baseTextStyle.copyWith(
-          fontSize: fontSize.xl_14,
+          fontSize: fontSize.sm_16,
           fontWeight: fontWeight.bold,
           fontFamily: fontFamily,
           height: lineHeight.large,

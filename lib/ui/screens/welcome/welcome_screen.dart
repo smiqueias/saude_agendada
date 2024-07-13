@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/coordinator/coordinator.dart';
+import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
 
 final class WelcomeScreen extends StatefulWidget {
@@ -13,35 +15,35 @@ final class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    /// Example Theme Usage
     return Scaffold(
       backgroundColor: context.colors.gray100,
       body: SafeArea(
-        minimum: const EdgeInsets.only(top: 80, left: 42, right: 42),
-        child: Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: double.infinity,
-            color: context.colors.gray100,
-            child: Column(
-              children: [
-                Text(
-                  textAlign: TextAlign.center,
-                  "Gerencie seus medicamentos de forma facil",
-                  style: context.typography.textLarge.copyWith(
-                    color: context.colors.greenDark,
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSpacings.lg_40,
+            horizontal: AppSpacings.sm_24,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                textAlign: TextAlign.center,
+                "Gerencie seus medicamentos de forma facil",
+                style: context.typography.textLarge.copyWith(
+                  color: context.colors.greenDark,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 29),
-                  height: 284,
-                  width: 292,
-                  color: context.colors.gray300,
-                  child: const Center(child: Text('Reservardo para imagem')),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 29),
-                  child: Text(
+              ),
+              Container(
+                height: 284,
+                width: 292,
+                color: context.colors.gray300,
+                child: const Center(child: Text('Reservardo para imagem')),
+              ),
+              const SizedBox(height: AppSpacings.md_32),
+              Column(
+                children: [
+                  Text(
                     'Não esqueça mais de tomar seus remédios.'
                     'Nós cuidamos de lembrar você sempre que precisar.',
                     textAlign: TextAlign.center,
@@ -49,21 +51,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: context.colors.gray600,
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 29),
-                  child: FloatingActionButton(
+                  const SizedBox(height: AppSpacings.md_32),
+                  FloatingActionButton(
                     backgroundColor: context.colors.greenBase,
                     elevation: 2,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.register.route,
+                      );
+                    },
                     child: Icon(
                       Icons.arrow_forward_ios,
                       color: context.colors.white,
                     ),
                   ),
-                )
-              ],
-            ),
+                  SizedBox(
+                    height: MediaQuery.of(context).padding.bottom +
+                        AppSpacings.sm_24,
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),
