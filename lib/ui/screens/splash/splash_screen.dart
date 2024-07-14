@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
+import 'package:scheduled_health/core/app_manager.dart';
+import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
 import 'package:scheduled_health/domain/entities/user.dart';
 import 'package:scheduled_health/ui/screens/splash/splash_view_model.dart';
-import 'package:scheduled_health/utils/extensions/theme_extension.dart';
+import 'package:scheduled_health/ui/splash_content_widget.dart';
 
 final class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -23,19 +25,17 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _splashViewModel = SplashViewModel(
       dataLayerGetIt<UserRepository>(),
+      coreLayerGetIt<AppManager>(),
     );
-    _initScreen(
-      context: context,
-    );
-  }
-
-  Future<void> _initScreen({required BuildContext context}) async {
-    final currentUser = await dataLayerGetIt<UserRepository>().fetchUserInfo();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        _handleSplashNavigation(
-          context: context,
-          user: currentUser,
+    _splashViewModel.getCurrentUser(
+      (user) {
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+            _handleSplashNavigation(
+              context: context,
+              user: user,
+            );
+          },
         );
       },
     );
@@ -43,11 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: double.infinity,
-      color: context.colors.greenSplash,
-    );
+    return const SplashContentWidget();
   }
 
   void _handleSplashNavigation({

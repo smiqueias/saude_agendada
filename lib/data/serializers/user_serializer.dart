@@ -16,13 +16,13 @@ final class UserSerializer implements Serializer<User, Map<String, dynamic>> {
   @override
   User from(Map<String, dynamic> json) {
     final name = json[UserKeys.username] as String?;
-    final createAt = DateTime.tryParse(json[UserKeys.createAt]);
+    final createAt = json[UserKeys.createAt] as String?;
     final shouldShowOnboardingScreen =
         json[UserKeys.shouldShowOnboardingScreen] as bool?;
 
     return User(
       name: name ?? '-',
-      createAt: createAt,
+      createAt: createAt ?? '',
       shouldShowOnboardingScreen: shouldShowOnboardingScreen ?? true,
     );
   }

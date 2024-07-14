@@ -4,8 +4,6 @@ import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
 
 final class WelcomeScreen extends StatefulWidget {
-  static const routeName = 'WelcomeScreen';
-
   const WelcomeScreen({super.key});
 
   @override

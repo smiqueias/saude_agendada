@@ -1,11 +1,11 @@
 class User {
   final String name;
-  final DateTime? createAt;
+  final String createAt;
   final bool shouldShowOnboardingScreen;
 
   User({
     required this.name,
+    required this.createAt,
     this.shouldShowOnboardingScreen = true,
-    this.createAt,
   });
 }

@@ -17,19 +17,27 @@ final class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<void> create({required User user}) async {
-    await _db.put(
-      id: _userRecord,
-      object: UserSerializer.shared.to(user),
-      store: _userStore,
-    );
+    try {
+      await _db.put(
+        id: _userRecord,
+        object: UserSerializer.shared.to(user),
+        store: _userStore,
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<User?> fetchUserInfo() async {
-    final user = await _db.get(
-      id: _userRecord,
-      store: _userStore,
-    );
-    return user != null ? UserSerializer.shared.from(user) : null;
+    try {
+      final user = await _db.get(
+        id: _userRecord,
+        store: _userStore,
+      );
+      return user != null ? UserSerializer.shared.from(user) : null;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

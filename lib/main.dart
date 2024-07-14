@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
+import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
+import 'package:scheduled_health/ui/splash_content_widget.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
 import 'package:scheduled_health/ui/theme/color_scheme_provider.dart';
@@ -73,7 +75,6 @@ class _MainAppState extends State<MainApp> {
                     vertical: AppSpacings.xs_16,
                     horizontal: AppSpacings.lg_40 + AppSpacings.lg_40,
                   ),
-                  disabledBackgroundColor: context.colors.gray600,
                   elevation: 0.0,
                   splashFactory: NoSplash.splashFactory,
                   shape: RoundedRectangleBorder(
@@ -86,7 +87,7 @@ class _MainAppState extends State<MainApp> {
         },
       );
     }
-    return const SizedBox.shrink();
+    return const SplashContentWidget();
   }
 
   Future<void> _initApp() async {
@@ -111,7 +112,10 @@ class _MainAppState extends State<MainApp> {
   Future<void> loadDependencies() async {
     final db = await openDatabase();
 
-    await registerDataLayerDependencies(db: db);
+    await Future.wait([
+      registerDataLayerDependencies(db: db),
+      registerCoreLayerDependencies()
+    ]);
   }
 }
 
