@@ -20,6 +20,7 @@ final class RegisterViewModel extends BaseViewModel {
         _appManager = appManager;
 
   String get errorMessage => _errorMessage;
+
   bool get isValidateError => errorMessage.isNotEmpty;
 
   void validateUsernameField({required TextEditingController username}) {
@@ -43,8 +44,11 @@ final class RegisterViewModel extends BaseViewModel {
         future: doRequest,
       );
       _appManager.setUser(user);
-      Navigator.pushReplacementNamed(context, AppRoutes.home.route);
-      print(user.name);
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          Navigator.pushReplacementNamed(context, AppRoutes.home.route);
+        },
+      );
     } catch (e, st) {
       print(''
           'Error: $e'
