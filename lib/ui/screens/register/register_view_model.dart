@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
 import 'package:scheduled_health/domain/entities/user.dart';
+import 'package:scheduled_health/domain/validators/register_user_validators.dart';
 import 'package:scheduled_health/ui/app_progress_indicator_barrier.dart';
 import 'package:scheduled_health/utils/base_view_model.dart';
 
@@ -16,11 +17,7 @@ final class RegisterViewModel extends BaseViewModel {
   bool get isValidateError => errorMessage.isNotEmpty;
 
   void validateUsernameField({required TextEditingController username}) {
-    if (username.text.isNotEmpty && username.text.length < 3) {
-      _errorMessage = "O nome deve conter no mínimo 3 caracteres";
-    } else {
-      _errorMessage = "";
-    }
+    _errorMessage = usernameValidator(username.text);
     notify();
   }
 
