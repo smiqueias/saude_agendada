@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/core/app_manager.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
 import 'package:scheduled_health/domain/entities/user.dart';
 import 'package:scheduled_health/domain/validators/register_user_validators.dart';
 import 'package:scheduled_health/ui/app_progress_indicator_barrier.dart';
 import 'package:scheduled_health/utils/base_view_model.dart';
 
+import '../../../coordinator/coordinator.dart';
+
 final class RegisterViewModel extends BaseViewModel {
   final UserRepository _userRepository;
+  final AppManager _appManager;
 
   String _errorMessage = "";
 
-  RegisterViewModel({required UserRepository userRepository})
-      : _userRepository = userRepository;
+  RegisterViewModel(
+      {required AppManager appManager, required UserRepository userRepository})
+      : _userRepository = userRepository,
+        _appManager = appManager;
 
   String get errorMessage => _errorMessage;
   bool get isValidateError => errorMessage.isNotEmpty;
@@ -36,6 +42,9 @@ final class RegisterViewModel extends BaseViewModel {
         context: context,
         future: doRequest,
       );
+      _appManager.setUser(user);
+      Navigator.pushReplacementNamed(context, AppRoutes.home.route);
+      print(user.name);
     } catch (e, st) {
       print(''
           'Error: $e'
@@ -50,6 +59,6 @@ final class RegisterViewModel extends BaseViewModel {
   }
 
   final snackBar = const SnackBar(
-    content: const Text('Ocorreu um error'),
+    content: Text('Ocorreu um erro ao tentar salvar, tente novamente'),
   );
 }

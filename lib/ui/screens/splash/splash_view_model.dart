@@ -15,7 +15,6 @@ final class SplashViewModel extends BaseViewModel {
     void Function(User? user) onComplete,
   ) async {
     final currentUser = await _userRepository.fetchUserInfo();
-    manager.setUser(currentUser);
     onComplete.call(currentUser);
     return currentUser;
   }

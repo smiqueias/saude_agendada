@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:scheduled_health/core/app_manager.dart';
+import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
 import 'package:scheduled_health/ui/screens/register/register_view_model.dart';
@@ -24,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _usernameEditingController = TextEditingController();
     _registerViewModel = RegisterViewModel(
       userRepository: dataLayerGetIt<UserRepository>(),
+      appManager: coreLayerGetIt<AppManager>(),
     );
     _usernameEditingController.addListener(
       () {
