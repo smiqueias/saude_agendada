@@ -46,7 +46,7 @@ final class RegisterViewModel extends BaseViewModel {
       _appManager.setUser(user);
       WidgetsBinding.instance.addPostFrameCallback(
         (_) {
-          Navigator.pushReplacementNamed(context, AppRoutes.home.route);
+          Navigator.pushReplacementNamed(context, AppRoutes.main.route);
         },
       );
     } catch (e, st) {

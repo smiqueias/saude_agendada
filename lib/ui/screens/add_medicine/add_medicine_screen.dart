@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class PillsInputForm extends StatefulWidget {
+class AddMedicineScreen extends StatefulWidget {
   @override
-  _PillsInputFormState createState() => _PillsInputFormState();
+  _AddMedicineScreenState createState() => _AddMedicineScreenState();
 }
 
-class _PillsInputFormState extends State<PillsInputForm> {
+class _AddMedicineScreenState extends State<AddMedicineScreen> {
   String _pillName = 'Oxycodone';
   int _pillAmount = 2;
   int _days = 30;

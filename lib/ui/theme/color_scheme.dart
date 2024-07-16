@@ -17,6 +17,7 @@ final class AppColorScheme {
   final Color gray400;
   final Color gray500;
   final Color gray600;
+  final Color gray700;
 
   /// Feedback
   final Color danger;
@@ -36,6 +37,7 @@ final class AppColorScheme {
     required this.gray400,
     required this.gray500,
     required this.gray600,
+    required this.gray700,
     required this.white,
     required this.black,
     required this.danger,
@@ -58,5 +60,6 @@ final class AppColorScheme {
       danger: const Color(0xFFC2464D),
       white: const Color(0xFFFFFFFF),
       greenSplash: const Color(0xFF2DA35D),
+      gray700: const Color(0xFFAAB2AD),
       black: const Color(0xFF000000));
 }
