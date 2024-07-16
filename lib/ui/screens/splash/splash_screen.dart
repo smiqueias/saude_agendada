@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/core/app_manager.dart';
 import 'package:scheduled_health/core/di.dart';
-import 'package:scheduled_health/data/di.dart';
-import 'package:scheduled_health/data/repositories/user_repository.dart';
+import 'package:scheduled_health/domain/di.dart';
 import 'package:scheduled_health/domain/entities/user.dart';
+import 'package:scheduled_health/domain/services/user_services.dart';
 import 'package:scheduled_health/ui/screens/splash/splash_view_model.dart';
 import 'package:scheduled_health/ui/splash_content_widget.dart';
 
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _splashViewModel = SplashViewModel(
-      dataLayerGetIt<UserRepository>(),
+      domainLayerGetIt<UserServices>(),
       coreLayerGetIt<AppManager>(),
     );
     _splashViewModel.getCurrentUser(

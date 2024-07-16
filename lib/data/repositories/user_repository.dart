@@ -4,7 +4,7 @@ import 'package:scheduled_health/domain/entities/user.dart';
 
 abstract interface class UserRepository {
   Future<void> create({required User user});
-  Future<User?> fetchUserInfo();
+  Future<Map<String, dynamic>?> fetchUserInfo();
 }
 
 final class UserRepositoryImpl implements UserRepository {
@@ -29,13 +29,13 @@ final class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User?> fetchUserInfo() async {
+  Future<Map<String, dynamic>?> fetchUserInfo() async {
     try {
       final user = await _db.get(
         id: _userRecord,
         store: _userStore,
       );
-      return user != null ? UserSerializer.shared.from(user) : null;
+      return user;
     } catch (e) {
       rethrow;
     }

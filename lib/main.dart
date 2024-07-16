@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
+import 'package:scheduled_health/domain/di.dart';
 import 'package:scheduled_health/ui/splash_content_widget.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
@@ -111,11 +112,9 @@ class _MainAppState extends State<MainApp> {
 
   Future<void> loadDependencies() async {
     final db = await openDatabase();
-
-    await Future.wait([
-      registerDataLayerDependencies(db: db),
-      registerCoreLayerDependencies()
-    ]);
+    await registerCoreLayerDependencies();
+    await registerDataLayerDependencies(db: db);
+    await registerDomainLayerDependencies();
   }
 }
 
