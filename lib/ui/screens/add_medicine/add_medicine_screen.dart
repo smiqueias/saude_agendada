@@ -59,7 +59,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Adicionar Medicamento',
+                      '',
                       style: context.typography.textLarge,
                     ),
                     const SizedBox(height: AppSpacings.xs_16),

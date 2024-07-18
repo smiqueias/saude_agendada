@@ -16,4 +16,8 @@ final class AddMedicineViewModel extends BaseViewModel {
     listNotificationSaved.removeAt(index);
     notify();
   }
+
+  final replyOne = '';
+
+  final replyTwo = '';
 }
