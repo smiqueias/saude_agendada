@@ -8,6 +8,7 @@ sealed class MedicineKeys {
   static const isRecurrent = 'isRecurrent';
   static const quantity = 'quantity';
   static const notificationDate = 'notificationDate';
+  static const howLong = 'howLong';
 }
 
 final class MedicineSerializer
@@ -26,6 +27,7 @@ final class MedicineSerializer
       quantity: json[MedicineKeys.quantity] as int,
       notificationDate: json[MedicineKeys.notificationDate] as String,
       uuid: json[MedicineKeys.uuid] as String,
+      howLong: json[MedicineKeys.howLong] as int,
     );
   }
 
@@ -37,5 +39,6 @@ final class MedicineSerializer
         MedicineKeys.isRecurrent: object.isRecurrent,
         MedicineKeys.quantity: object.quantity,
         MedicineKeys.notificationDate: object.notificationDate,
+        MedicineKeys.howLong: object.howLong,
       };
 }

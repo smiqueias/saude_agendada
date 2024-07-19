@@ -4,14 +4,16 @@ class Medicine {
   final bool isCompleted;
   final bool isRecurrent;
   final int quantity;
+  final int howLong;
   final String notificationDate;
 
   Medicine({
     required this.uuid,
-    required this.name,
+    required this.name, //
+    required this.howLong,
     required this.isCompleted,
     required this.isRecurrent,
-    required this.quantity,
-    required this.notificationDate,
+    required this.quantity, //
+    required this.notificationDate, //
   });
 }
