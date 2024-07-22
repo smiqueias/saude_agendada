@@ -17,13 +17,13 @@ final class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  late TextEditingController _usernameEditingController;
+  final TextEditingController _usernameEditingController =
+      TextEditingController();
   late RegisterViewModel _registerViewModel;
 
   @override
   void initState() {
     super.initState();
-    _usernameEditingController = TextEditingController();
     _registerViewModel = RegisterViewModel(
       userRepository: dataLayerGetIt<UserRepository>(),
       appManager: coreLayerGetIt<AppManager>(),

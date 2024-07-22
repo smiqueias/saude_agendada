@@ -3,6 +3,7 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/core/di.dart';
+import 'package:scheduled_health/data/db/sqlflite.dart';
 import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/domain/di.dart';
 import 'package:scheduled_health/ui/splash_content_widget.dart';
@@ -40,6 +41,7 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+    openSqfliteDb();
     if (_isLoadedDependencies) {
       return AppThemeProvider(
         appColorScheme: AppColorScheme.light(),
@@ -100,6 +102,7 @@ class _MainAppState extends State<MainApp> {
 
   Future<Database> openDatabase() async {
     final directory = await getApplicationDocumentsDirectory();
+
     await directory.create(recursive: true);
 
     final dbPath = path.join(directory.path, _dbName);

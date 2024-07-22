@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/ui/screens/add_medicine/add_medicine_screen.dart';
 import 'package:scheduled_health/ui/screens/home/home_screen.dart';
 import 'package:scheduled_health/ui/widgets/app_bottom_nav_bar.dart';
 
@@ -41,7 +42,7 @@ class _MainScreenSwitcherState extends State<MainScreenSwitcher> {
               index: _currentScreen.index,
               children: [
                 const HomeScreen(),
-                Container(),
+                AddMedicineScreen(),
               ],
             ),
           ),
