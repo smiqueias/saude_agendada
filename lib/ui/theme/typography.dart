@@ -5,26 +5,30 @@ final class AppFontSize {
   final double xs_12;
   final double xl_14;
   final double sm_16;
-  final double md_32;
+  final double md_24;
+  final double lg_32;
 
   AppFontSize({
     required this.xs_12,
     required this.xl_14,
     required this.sm_16,
-    required this.md_32,
+    required this.md_24,
+    required this.lg_32,
   });
 
   AppFontSize copyWith({
     double? xs_12,
     double? xl_14,
     double? sm_16,
-    double? md_32,
+    double? md_24,
+    double? lg_32,
   }) {
     return AppFontSize(
       xs_12: xs_12 ?? this.xs_12,
       xl_14: xl_14 ?? this.xl_14,
       sm_16: sm_16 ?? this.sm_16,
-      md_32: md_32 ?? this.md_32,
+      md_24: md_24 ?? this.md_24,
+      lg_32: lg_32 ?? this.lg_32,
     );
   }
 }
@@ -106,7 +110,7 @@ final class AppTypography {
           height: lineHeight.large,
         ),
         textLarge = _baseTextStyle.copyWith(
-          fontSize: fontSize.md_32,
+          fontSize: fontSize.lg_32,
           fontWeight: fontWeight.bold,
           fontFamily: fontFamily,
           height: lineHeight.large,
@@ -130,7 +134,7 @@ final class AppTypography {
           height: lineHeight.small,
         ),
         textMd = _baseTextStyle.copyWith(
-          fontSize: fontSize.xl_14,
+          fontSize: fontSize.md_24,
           fontWeight: fontWeight.regular,
           fontFamily: fontFamily,
         ),

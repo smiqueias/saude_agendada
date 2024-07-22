@@ -53,7 +53,8 @@ class _MainAppState extends State<MainApp> {
             xs_12: 12.0,
             xl_14: 14.0,
             sm_16: 16.0,
-            md_32: 32.0,
+            lg_32: 32.0,
+            md_24: 24.0,
           ),
           fontWeight: AppFontWeight(
             regular: FontWeight.w400,

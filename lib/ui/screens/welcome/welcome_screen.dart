@@ -38,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 color: context.colors.gray300,
                 child: const Center(child: Text('Reservardo para imagem')),
               ),
-              const SizedBox(height: AppSpacings.md_32),
+              const SizedBox(height: AppSpacings.lg_32),
               Column(
                 children: [
                   Text(
@@ -49,7 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: context.colors.gray600,
                     ),
                   ),
-                  const SizedBox(height: AppSpacings.md_32),
+                  const SizedBox(height: AppSpacings.lg_32),
                   FloatingActionButton(
                     backgroundColor: context.colors.greenBase,
                     elevation: 2,
