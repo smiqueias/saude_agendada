@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:scheduled_health/ui/screens/add_medicine/add_medicine_screen.dart';
 import 'package:scheduled_health/ui/screens/home/home_screen.dart';
-import 'package:scheduled_health/ui/screens/main/main_screen.dart';
 import 'package:scheduled_health/ui/screens/register/register_screen.dart';
 import 'package:scheduled_health/ui/screens/splash/splash_screen.dart';
 import 'package:scheduled_health/ui/screens/welcome/welcome_screen.dart';
 
 enum AppRoutes {
-  main(route: '/main'),
   welcome(route: '/welcome'),
   splash(route: '/splash'),
   home(route: '/home'),
-  register(route: '/register');
+  register(route: '/register'),
+  addMedicine(route: '/add-medicine');
 
   final String route;
 
@@ -19,9 +19,9 @@ enum AppRoutes {
 }
 
 final appRoutes = <String, WidgetBuilder>{
-  AppRoutes.main.route: (context) => const MainScreenSwitcher(),
   AppRoutes.welcome.route: (context) => const WelcomeScreen(),
   AppRoutes.splash.route: (context) => const SplashScreen(),
   AppRoutes.home.route: (context) => const HomeScreen(),
   AppRoutes.register.route: (context) => const RegisterScreen(),
+  AppRoutes.addMedicine.route: (context) => const AddMedicineScreen(),
 };

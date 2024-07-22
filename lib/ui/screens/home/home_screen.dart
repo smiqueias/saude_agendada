@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/core/app_manager.dart';
 import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/ui/screens/home/home_view_model.dart';
@@ -47,6 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: context.colors.greenSplash,
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.addMedicine.route);
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }

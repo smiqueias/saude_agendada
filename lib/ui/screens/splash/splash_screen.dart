@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (user?.shouldShowOnboardingScreen ?? true) {
       Navigator.pushReplacementNamed(context, AppRoutes.welcome.route);
     } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.main.route);
+      Navigator.pushReplacementNamed(context, AppRoutes.home.route);
     }
   }
 }
