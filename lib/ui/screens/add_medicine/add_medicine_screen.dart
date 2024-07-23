@@ -48,8 +48,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   style: context.typography.textLarge,
                 ),
                 const SizedBox(height: AppSpacings.xs_16),
+                const Text('Medicamento'),
                 FormAddMedicine(
-                  hintText: 'Nome do medicamento',
+                  hintText: 'Digite o nome do medicamento',
                   iconForm: Icon(
                     Icons.assignment,
                     color: context.colors.greenSplash,
@@ -60,22 +61,34 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: FormAddMedicine(
-                        hintText: 'Quantidade',
-                        keyboardType: TextInputType.number,
-                        iconForm: Icon(Icons.medication,
-                            color: context.colors.greenSplash),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Quantidade'),
+                          FormAddMedicine(
+                            hintText: 'Quantidade',
+                            keyboardType: TextInputType.number,
+                            iconForm: Icon(Icons.medication,
+                                color: context.colors.greenSplash),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(width: AppSpacings.xxs_8),
                     Expanded(
-                      child: FormAddMedicine(
-                        keyboardType: TextInputType.number,
-                        hintText: 'Período',
-                        iconForm: Icon(
-                          Icons.schedule,
-                          color: context.colors.greenSplash,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Período'),
+                          FormAddMedicine(
+                            keyboardType: TextInputType.number,
+                            hintText: 'Período',
+                            iconForm: Icon(
+                              Icons.schedule,
+                              color: context.colors.greenSplash,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -123,13 +136,45 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                     itemCount: _listNotificationSaved.length,
                     itemBuilder: (context, index) {
                       return NotificationSaved(
-                          notificationTime: _listNotificationSaved[index]);
+                        notificationTime: _listNotificationSaved[index],
+                        onDelete: () {
+                          setState(
+                            () {
+                              _listNotificationSaved.removeAt(index);
+                            },
+                          );
+                        },
+                      );
                     },
                   ),
                 ),
               ],
             ),
           ),
+        ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacings.xs_16),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    elevation: WidgetStateProperty.all<double>(2.0),
+                  ),
+                  onPressed: () {},
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add),
+                      Text('Adicionar'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
