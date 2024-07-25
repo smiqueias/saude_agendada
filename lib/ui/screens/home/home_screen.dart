@@ -32,16 +32,53 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: AppSpacings.lg_40,
-            horizontal: AppSpacings.sm_24,
+            horizontal: AppSpacings.xs_16,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Olá,\n${_homeViewModel.manager.currentUser?.name ?? '-'}",
-                style: context.typography.textLarge.copyWith(
-                  color: context.colors.greenDark,
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Olá,\n${_homeViewModel.manager.currentUser?.name ?? ''}",
+                  style: context.typography.textLarge.copyWith(
+                    color: context.colors.greenDark,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: AppSpacings.xxs_8),
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: context.colors.greenLight,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: AppSpacings.xxs_4,
+                      left: AppSpacings.xxs_8,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Medicamentos de hoje',
+                          style: context.typography.button,
+                        ),
+                        const Text('0 de 5 medicamentos consumidos'),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: AppSpacings.xxs_8),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Resumo de hoje',
+                    style: context.typography.input,
+                  ),
                 ),
               ),
             ],

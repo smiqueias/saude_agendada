@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:scheduled_health/core/app_manager.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
@@ -50,10 +51,12 @@ final class RegisterViewModel extends BaseViewModel {
         },
       );
     } catch (e, st) {
-      print(''
-          'Error: $e'
-          'Stacktrace: $st'
-          '');
+      if (kDebugMode) {
+        print(''
+            'Error: $e'
+            'Stacktrace: $st'
+            '');
+      }
       WidgetsBinding.instance.addPostFrameCallback(
         (_) {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);

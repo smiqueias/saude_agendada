@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/ui/screens/add_medicine/add_medicine_view_model.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/ui/widgets/form_add_medicine.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
@@ -13,9 +14,20 @@ class AddMedicineScreen extends StatefulWidget {
 }
 
 class _AddMedicineScreenState extends State<AddMedicineScreen> {
-  TimeOfDay selectedTimeNow = TimeOfDay.now();
-  final List<TimeOfDay> _listNotificationSaved = [];
   final _formKey = GlobalKey<FormState>();
+  late AddMedicineViewModel addMedicineViewModel;
+
+  @override
+  void initState() {
+    addMedicineViewModel = AddMedicineViewModel();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    addMedicineViewModel.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,119 +48,116 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
-              top: AppSpacings.xxxs_8,
+              top: AppSpacings.xxs_4,
               left: AppSpacings.sm_24,
               right: AppSpacings.sm_24,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Adicionar Medicamento',
-                  style: context.typography.textLarge,
-                ),
-                const SizedBox(height: AppSpacings.xs_16),
-                const Text('Medicamento'),
-                FormAddMedicine(
-                  hintText: 'Digite o nome do medicamento',
-                  iconForm: Icon(
-                    Icons.assignment,
-                    color: context.colors.greenSplash,
-                  ),
-                ),
-                const SizedBox(height: AppSpacings.xxs_8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Quantidade'),
-                          FormAddMedicine(
-                            hintText: 'Quantidade',
-                            keyboardType: TextInputType.number,
-                            iconForm: Icon(Icons.medication,
-                                color: context.colors.greenSplash),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacings.xxs_8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Período'),
-                          FormAddMedicine(
-                            keyboardType: TextInputType.number,
-                            hintText: 'Período',
-                            iconForm: Icon(
-                              Icons.schedule,
-                              color: context.colors.greenSplash,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacings.xs_16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: ListenableBuilder(
+              listenable: addMedicineViewModel,
+              builder: (context, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Notificações',
-                      style: context.typography.button,
+                      'Adicionar Medicamento',
+                      style: context.typography.textLarge,
                     ),
-                    TextButton(
-                      onPressed: () async {
-                        final TimeOfDay? savedTime = await showTimePicker(
-                          context: context,
-                          initialTime: selectedTimeNow,
-                          builder: (BuildContext context, Widget? child) {
-                            return MediaQuery(
-                              data: MediaQuery.of(context)
-                                  .copyWith(alwaysUse24HourFormat: true),
-                              child: child ?? Container(),
+                    const SizedBox(height: AppSpacings.xs_16),
+                    const Text('Medicamento'),
+                    FormAddMedicine(
+                      hintText: 'Digite o nome do medicamento',
+                      iconForm: Icon(
+                        Icons.assignment,
+                        color: context.colors.greenSplash,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacings.xxs_8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Quantidade'),
+                              FormAddMedicine(
+                                hintText: 'Quantidade',
+                                keyboardType: TextInputType.number,
+                                iconForm: Icon(Icons.medication,
+                                    color: context.colors.greenSplash),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacings.xxs_8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Período'),
+                              FormAddMedicine(
+                                keyboardType: TextInputType.number,
+                                hintText: 'Período',
+                                iconForm: Icon(
+                                  Icons.schedule,
+                                  color: context.colors.greenSplash,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacings.xs_16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Notificações',
+                          style: context.typography.button,
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            final TimeOfDay? savedTime = await showTimePicker(
+                              context: context,
+                              initialTime: addMedicineViewModel.selectedTimeNow,
+                              builder: (BuildContext context, Widget? child) {
+                                return MediaQuery(
+                                  data: MediaQuery.of(context)
+                                      .copyWith(alwaysUse24HourFormat: true),
+                                  child: child ?? Container(),
+                                );
+                              },
                             );
+                            addMedicineViewModel.addNotification(savedTime);
                           },
-                        );
-                        if (savedTime != null) {
-                          setState(() {
-                            selectedTimeNow = savedTime;
-                            _listNotificationSaved.add(selectedTimeNow);
-                          });
-                        }
-                      },
-                      child: Text(
-                        '+',
-                        style: context.typography.textMd
-                            .copyWith(color: context.colors.greenSplash),
+                          child: Text(
+                            '+',
+                            style: context.typography.textMd
+                                .copyWith(color: context.colors.greenSplash),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Flexible(
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        itemCount:
+                            addMedicineViewModel.listNotificationSaved.length,
+                        itemBuilder: (context, index) {
+                          return NotificationSaved(
+                            index: index,
+                            addMedicineViewModel: addMedicineViewModel,
+                            notificationTime: addMedicineViewModel
+                                .listNotificationSaved[index],
+                          );
+                        },
                       ),
                     ),
                   ],
-                ),
-                Flexible(
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: _listNotificationSaved.length,
-                    itemBuilder: (context, index) {
-                      return NotificationSaved(
-                        notificationTime: _listNotificationSaved[index],
-                        onDelete: () {
-                          setState(
-                            () {
-                              _listNotificationSaved.removeAt(index);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),

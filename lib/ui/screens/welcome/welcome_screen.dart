@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/assets/images/images_path.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
@@ -32,13 +33,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: context.colors.greenDark,
                 ),
               ),
-              Container(
-                height: 284,
-                width: 292,
-                color: context.colors.gray300,
-                child: const Center(child: Text('Reservardo para imagem')),
+              Center(
+                child: Image.asset(
+                  ImagePaths.welcomeScreen.path,
+                  scale: 1.5,
+                ),
               ),
-              const SizedBox(height: AppSpacings.lg_32),
+              SizedBox(height: AppSpacings.xxs_4),
               Column(
                 children: [
                   Text(

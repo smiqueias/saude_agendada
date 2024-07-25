@@ -5,7 +5,6 @@ import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/domain/di.dart';
-import 'package:scheduled_health/ui/splash_content_widget.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
 import 'package:scheduled_health/ui/theme/color_scheme_provider.dart';
@@ -64,6 +63,7 @@ class _MainAppState extends State<MainApp> {
         ),
         builder: (context) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             initialRoute: AppRoutes.splash.route,
             routes: appRoutes,
             theme: ThemeData(
@@ -89,7 +89,7 @@ class _MainAppState extends State<MainApp> {
         },
       );
     }
-    return const SplashContentWidget();
+    return Container();
   }
 
   Future<void> _initApp() async {

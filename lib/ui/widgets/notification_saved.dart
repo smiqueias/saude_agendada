@@ -1,24 +1,22 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:scheduled_health/ui/screens/add_medicine/add_medicine_view_model.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
 
-class NotificationSaved extends StatefulWidget {
+class NotificationSaved extends StatelessWidget {
   final TimeOfDay notificationTime;
-  final VoidCallback onDelete;
+  final AddMedicineViewModel addMedicineViewModel;
+  final int index;
 
   const NotificationSaved({
     super.key,
     required this.notificationTime,
-    required this.onDelete,
+    required this.addMedicineViewModel,
+    required this.index,
   });
 
-  @override
-  State<NotificationSaved> createState() => _NotificationSavedState();
-}
-
-class _NotificationSavedState extends State<NotificationSaved> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +28,7 @@ class _NotificationSavedState extends State<NotificationSaved> {
               leading:
                   Icon(Icons.notifications, color: context.colors.greenSplash),
               title: Text(
-                '${widget.notificationTime.hour}:${widget.notificationTime.minute} ',
+                '${notificationTime.hour}:${notificationTime.minute} ',
                 style: TextStyle(color: context.colors.black),
               ),
             ),
@@ -67,7 +65,8 @@ class _NotificationSavedState extends State<NotificationSaved> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    widget.onDelete();
+                                    addMedicineViewModel
+                                        .removeNotification(index);
                                     Navigator.pop(context);
                                   },
                                   child: Icon(
