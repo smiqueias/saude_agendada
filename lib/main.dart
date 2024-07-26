@@ -5,6 +5,11 @@ import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/domain/di.dart';
+import 'package:scheduled_health/ui/screens/add_medicine/add_medicine_screen.dart';
+import 'package:scheduled_health/ui/screens/home/home_screen.dart';
+import 'package:scheduled_health/ui/screens/register/register_screen.dart';
+import 'package:scheduled_health/ui/screens/splash/splash_screen.dart';
+import 'package:scheduled_health/ui/screens/welcome/welcome_screen.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/ui/theme/color_scheme.dart';
 import 'package:scheduled_health/ui/theme/color_scheme_provider.dart';
@@ -29,74 +34,79 @@ final class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  bool _isLoadedDependencies = false;
-
   @override
   void initState() {
     super.initState();
-    _initApp();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoadedDependencies) {
-      return AppThemeProvider(
-        appColorScheme: AppColorScheme.light(),
-        typography: AppTypography(
-          fontFamily: fontFamily,
-          lineHeight: AppLineHeight(
-            small: 1.2,
-            large: 1.4,
-          ),
-          fontSize: AppFontSize(
-            xs_12: 12.0,
-            xl_14: 14.0,
-            sm_16: 16.0,
-            lg_32: 32.0,
-            md_24: 24.0,
-          ),
-          fontWeight: AppFontWeight(
-            regular: FontWeight.w400,
-            bold: FontWeight.w700,
-            semibold: FontWeight.w300,
-          ),
+    return AppThemeProvider(
+      appColorScheme: AppColorScheme.light(),
+      typography: AppTypography(
+        fontFamily: fontFamily,
+        lineHeight: AppLineHeight(
+          small: 1.2,
+          large: 1.4,
         ),
-        builder: (context) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.splash.route,
-            routes: appRoutes,
-            theme: ThemeData(
-              fontFamily: fontFamily,
-              useMaterial3: false,
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: context.colors.white,
-                  backgroundColor: context.colors.greenSplash,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppSpacings.xs_16,
-                    horizontal: AppSpacings.lg_40 + AppSpacings.lg_40,
-                  ),
-                  elevation: 0.0,
-                  splashFactory: NoSplash.splashFactory,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
+        fontSize: AppFontSize(
+          xs_12: 12.0,
+          xl_14: 14.0,
+          sm_16: 16.0,
+          lg_32: 32.0,
+          md_24: 24.0,
+        ),
+        fontWeight: AppFontWeight(
+          regular: FontWeight.w400,
+          bold: FontWeight.w700,
+          semibold: FontWeight.w300,
+        ),
+      ),
+      builder: (context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: AppRoutes.splash.route,
+          routes: _setupRoutes(),
+          theme: ThemeData(
+            fontFamily: fontFamily,
+            useMaterial3: false,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: context.colors.white,
+                backgroundColor: context.colors.greenSplash,
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppSpacings.xs_16,
+                  horizontal: AppSpacings.lg_40 + AppSpacings.lg_40,
+                ),
+                elevation: 0.0,
+                splashFactory: NoSplash.splashFactory,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
               ),
             ),
-          );
-        },
-      );
-    }
-    return Container();
+          ),
+        );
+      },
+    );
+  }
+
+  Map<String, Widget Function(BuildContext)> _setupRoutes() {
+    final appRoutes = <String, WidgetBuilder>{
+      AppRoutes.welcome.route: (context) => const WelcomeScreen(),
+      AppRoutes.splash.route: (context) => SplashScreen(
+            onInitApp: _initApp,
+          ),
+      AppRoutes.home.route: (context) => const HomeScreen(),
+      AppRoutes.register.route: (context) => const RegisterScreen(),
+      AppRoutes.addMedicine.route: (context) => const AddMedicineScreen(),
+    };
+
+    return appRoutes;
   }
 
   Future<void> _initApp() async {
     await loadDependencies();
-    setState(() {
-      _isLoadedDependencies = true;
-    });
   }
 
   Future<Database> openDatabase() async {

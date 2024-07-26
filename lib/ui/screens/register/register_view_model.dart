@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scheduled_health/core/app_manager.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
 import 'package:scheduled_health/domain/entities/user.dart';
-import 'package:scheduled_health/domain/validators/register_user_validators.dart';
+import 'package:scheduled_health/domain/usecases/validate_username.dart';
 import 'package:scheduled_health/ui/app_progress_indicator_barrier.dart';
 import 'package:scheduled_health/utils/base_view_model.dart';
 
@@ -12,20 +12,24 @@ import '../../../coordinator/coordinator.dart';
 final class RegisterViewModel extends BaseViewModel {
   final UserRepository _userRepository;
   final AppManager _appManager;
+  final ValidateUsernameUseCase _validateUsernameUseCase;
 
-  String _errorMessage = "";
+  UsernameError _usernameError = UsernameError.none;
 
-  RegisterViewModel(
-      {required AppManager appManager, required UserRepository userRepository})
-      : _userRepository = userRepository,
-        _appManager = appManager;
+  RegisterViewModel({
+    required AppManager appManager,
+    required UserRepository userRepository,
+    required ValidateUsernameUseCase validateUsernameUseCase,
+  })  : _userRepository = userRepository,
+        _appManager = appManager,
+        _validateUsernameUseCase = validateUsernameUseCase;
 
-  String get errorMessage => _errorMessage;
+  UsernameError get usernameError => _usernameError;
 
-  bool get isValidateError => errorMessage.isNotEmpty;
+  bool get isValidateError => _usernameError != UsernameError.none;
 
   void validateUsernameField({required TextEditingController username}) {
-    _errorMessage = usernameValidator(username.text);
+    _usernameError = _validateUsernameUseCase(username.text);
     notify();
   }
 

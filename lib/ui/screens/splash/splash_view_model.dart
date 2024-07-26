@@ -17,6 +17,7 @@ final class SplashViewModel extends BaseViewModel {
     final currentUser = await _userServices.fetchUserInfo();
     manager.setUser(currentUser);
     onComplete.call(currentUser);
+    notify();
     return currentUser;
   }
 }

@@ -4,6 +4,8 @@ import 'package:scheduled_health/core/app_manager.dart';
 import 'package:scheduled_health/core/di.dart';
 import 'package:scheduled_health/data/di.dart';
 import 'package:scheduled_health/data/repositories/user_repository.dart';
+import 'package:scheduled_health/domain/di.dart';
+import 'package:scheduled_health/domain/usecases/validate_username.dart';
 import 'package:scheduled_health/ui/screens/register/register_view_model.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
@@ -25,9 +27,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.initState();
     _usernameEditingController = TextEditingController();
     _registerViewModel = RegisterViewModel(
-      userRepository: dataLayerGetIt<UserRepository>(),
-      appManager: coreLayerGetIt<AppManager>(),
-    );
+        userRepository: dataLayerGetIt<UserRepository>(),
+        appManager: coreLayerGetIt<AppManager>(),
+        validateUsernameUseCase: domainLayerGetIt<ValidateUsernameUseCase>());
     _usernameEditingController.addListener(
       () {
         _registerViewModel.validateUsernameField(
@@ -89,7 +91,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration: InputDecoration(
                             error: _registerViewModel.isValidateError
                                 ? Text(
-                                    _registerViewModel.errorMessage,
+                                    _registerViewModel
+                                        .usernameError.errorDescription,
                                     style: context.typography.input.copyWith(
                                       color: context.colors.gray600,
                                     ),

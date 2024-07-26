@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:scheduled_health/assets/images/images_path.dart';
 import 'package:scheduled_health/coordinator/coordinator.dart';
 import 'package:scheduled_health/ui/theme/app_spacings.dart';
 import 'package:scheduled_health/utils/extensions/theme_extension.dart';
+import 'package:scheduled_health/utils/image_handler.dart';
 
 final class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -35,11 +35,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               Center(
                 child: Image.asset(
-                  ImagePaths.welcomeScreen.path,
+                  ImagePathHandler.welcomeScreen.imagePath,
                   scale: 1.5,
                 ),
               ),
-              SizedBox(height: AppSpacings.xxs_4),
+              const SizedBox(height: AppSpacings.xxs_4),
               Column(
                 children: [
                   Text(
